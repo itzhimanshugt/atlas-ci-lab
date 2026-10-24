@@ -1,6 +1,8 @@
 name: CI
 
 on: [push, pull_request]
+permissions:
+  contents: read
 
 jobs:
   test:
@@ -13,7 +15,7 @@ jobs:
           node-version: '20'
       - name: Install dependencies
         run: npm install
-      name: Run tests
+      - name: Run tests
         run: npm test
 
   deploy-check:
@@ -23,4 +25,4 @@ jobs:
       - name: Deploy
         run: echo "Deploying with token $APP_TOKEN"
         env:
-          APP_TOKEN: ${{ secrets.APP_TOK }}
+          APP_TOKEN: ${{ secrets.APP_TOKEN }}
